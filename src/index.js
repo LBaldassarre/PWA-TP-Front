@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './index.css';
 
 import Home from './pages/Home/Home';
@@ -12,14 +12,14 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/characters' element={<Characters/>}/>
-        <Route path='/contact' element={<Contact/>}/>
+        <Route path='/' element={<Home />} />
+        <Route path='/characters' element={<Characters />} />
+        <Route path='/contact' element={<Contact />} />
       </Routes>
     </Router>
   </React.StrictMode>
 );
-//por el momento como no sabemos todavia como navegar entre paginas, las cargamos a las 3 y vamos comentando cual estamos queriendo reproducir 
+//por el momento como no sabemos todavia como navegar entre paginas, las cargamos a las 3 y vamos comentando cual estamos queriendo reproducir
 
 //para los estilos, podemos o hacer todo en CSS "puro" , o podemos utilizar las clases de Bootstrap.
 //IMPORTANTE, el atributo "class" en React lo reemplazamos por "className"

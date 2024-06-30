@@ -17,10 +17,10 @@
 .form-check-input:checked {
     background-color: #223142;
 
-    
+
 }
 
-.form-check-input:checked + .form-check-label {
+.form-check-input:checked+.form-check-label {
     color: #f5f5f5;
 }
 

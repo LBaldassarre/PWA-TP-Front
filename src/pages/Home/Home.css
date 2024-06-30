@@ -1,5 +1,5 @@
-.container-home{
-    background-color: rgba(255, 255, 255,0.9);
+.container-home {
+    background-color: rgba(255, 255, 255, 0.9);
     justify-self: center;
 }
 
@@ -25,7 +25,7 @@ p {
     align-items: center;
 }
 
-.btn-inicio{
+.btn-inicio {
     background-color: #344d67;
     color: #6eccaf;
     padding: 15px;
@@ -61,6 +61,7 @@ p {
         align-items: center;
     }
 }
+
 /* en este caso defini el color en index.css y en Home.css
 queda el de Home, por que es el "ultimo" definido.
 Esto hablando de gerarquia en caso que en dos componentes definamos el mismo selector en ambos archivos */
