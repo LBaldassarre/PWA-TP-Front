@@ -15,8 +15,8 @@ export default function Home(){
                 </p>
                 <h2 className="text-center mt-5">Lets go!</h2>
                 <ul className="home-buttons align-self-center justify-self-center d-flex justify-content-center">
-                    <BotonInicio nombreBoton='Characters' pasaje="/characters"/>
-                    <BotonInicio nombreBoton="Contact" pasaje="/contact"/> 
+                    <BotonInicio nombreBoton='Log In' pasaje="/characters"/>
+                    <BotonInicio nombreBoton="Register" pasaje="/contact"/> 
                 </ul>       
             </div>
 
