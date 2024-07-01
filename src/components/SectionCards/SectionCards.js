@@ -13,6 +13,7 @@ export default function SectionCards() {
     let [listaPersonajes, setListaPersonajes] = useState([]);//genero un estado que como inicio es un array vacio que luego lo modifico con la info que traigo de la API;
     let [personajesCompleto, setPersonajesCompleto] = useState([])
     let [filtrosAplicados, setFiltrosAplicados] = useState([]);//lista que inicia vacia de todos los filtros que tenemos marcados para aplicar
+    let [users, setUsers] = useState({});
 
     const traerPersonajes = async () => {
 
@@ -23,14 +24,24 @@ export default function SectionCards() {
             .catch((error) => { console.log(error) })//accionar si no logra obtenerla
 
         //json() -> metodo que evalua lo que le pasemos como JSON y lo parsea , lo tranasforma a una array|objeto
-        console.log(info)
-        //listaPersonajes=info;//en la proxima clase mejoramos esta asignacion con el concepto de "state" o "estados"
 
         setListaPersonajes(info)//cambio el estado de listaPersonajes de vacio a la lista con todos los personajes que traemos de la API y va a re-renderizar el componente - actualizarlo
 
         setPersonajesCompleto(info)
     };
 
+    const traerUsuarios = async () => {
+
+        let user = await fetch("http://localhost:5000/users")//ejecutar la peticion a esa direccion
+            .then((resp) => { return resp.json() })//accionar si logra obtener la info
+            .then((data) => { return data.users[0] })
+            //siguiente accion que hacemos si todo salio bien.En este caso aprovechamos que sabemos que esta API en particular devuelve la lista de personajes dentro de la propiedad "results" 
+            .catch((error) => { console.log(error) })//accionar si no logra obtenerla
+
+        //json() -> metodo que evalua lo que le pasemos como JSON y lo parsea , lo tranasforma a una array|objeto
+
+        setUsers(user)
+    };
 
     //funcion que agrega o saca filtros de la lista de filtros a aplicar (actualizo la lista de los filtros a aplicar)
 
@@ -52,7 +63,6 @@ export default function SectionCards() {
 
     useEffect(() => {
         setListaPersonajes(personajesCompleto)
-        console.log(filtrosAplicados)
         //por cada filtro que tiene pulsado, modifica la informacion de "listaPersonaje"
         filtrosAplicados.forEach((data) => {
             if (data === "Dead" || data === "Alive") {
