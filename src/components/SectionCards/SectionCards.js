@@ -13,7 +13,7 @@ export default function SectionCards() {
     let [listaPersonajes, setListaPersonajes] = useState([]);//genero un estado que como inicio es un array vacio que luego lo modifico con la info que traigo de la API;
     let [personajesCompleto, setPersonajesCompleto] = useState([])
     let [filtrosAplicados, setFiltrosAplicados] = useState([]);//lista que inicia vacia de todos los filtros que tenemos marcados para aplicar
-    let [users, setUsers] = useState({});
+    let [user, setUsers] = useState({});
 
     const traerPersonajes = async () => {
 
@@ -30,7 +30,7 @@ export default function SectionCards() {
         setPersonajesCompleto(info)
     };
 
-    const traerUsuarios = async () => {
+    const traerUsuario = async () => {
 
         let user = await fetch("http://localhost:5000/users")//ejecutar la peticion a esa direccion
             .then((resp) => { return resp.json() })//accionar si logra obtener la info
@@ -81,7 +81,9 @@ export default function SectionCards() {
     //este useEffect se ejecuta cada vez que ve que se modifica la lista de filtros a aplicar
 
     useEffect(() => {
-        traerPersonajes()
+        traerPersonajes();
+        traerUsuario();
+        console.log(user.characters_id)
     }, []);
     //a penas se cargue por primera vez el componente "SectionCards",ejecute la funcion traerPersonajes
     return (
@@ -94,7 +96,8 @@ export default function SectionCards() {
                 {
                     listaPersonajes.map((personaje) => {
                         // return  <Card key={personaje.id} infoPersonaje={personaje}/>
-                        return <Card key={personaje.id} infoPersonaje={personaje} />
+                        const isFavorite = user.characters_id.includes(personaje.id) ? true : false;
+                        return <Card key={personaje.id} infoPersonaje={personaje} isFavorite={isFavorite} />
                     })
                 }
             </div>

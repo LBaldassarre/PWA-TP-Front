@@ -4,12 +4,17 @@ import Description from '../Description/Description';
 
 import "./Card.css"
 
-export default function Card({ infoPersonaje }) {
+export default function Card({ infoPersonaje, isFavorite }) {
 
     let [hide, setHide] = useState(true);
+    let [isFav, setIsFav] = useState(isFavorite);
 
     const showMore = () => {
         setHide(false)
+    }
+
+    const handleFavorite = () => {
+        setIsFav(!isFav);
     }
 
     return (
@@ -22,6 +27,7 @@ export default function Card({ infoPersonaje }) {
                     hide === false ? "card-presentation d-flex flex-column aling-items-center h-100" : "card-presentation d-flex flex-column aling-items-center justify-content-between h-100"
                 }
                 >
+                    {isFav ? <i onClick={handleFavorite}className="bi bi-heart-fill"></i> : <i onClick={handleFavorite} className="bi bi-heart"></i>}
                     <img className="img-card card-img-top" src={infoPersonaje.image} />
                     <h3 className="card-title text-center">{infoPersonaje.name}</h3>
                     <button className={hide === false ? "d-none" : "btn-card btn btn-active d-flex align-self-end m-0"} onClick={showMore}>Know More</button>

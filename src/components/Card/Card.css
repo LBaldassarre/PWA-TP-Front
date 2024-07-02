@@ -34,6 +34,15 @@
     font-size: 1.3rem;
 }
 
+.bi-heart,
+.bi-heart-fill {
+    color: #fff;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+}
+
 @media (min-width: 920px) {
     .card-open {
         height: 450px;

@@ -1,4 +1,4 @@
-export default function Description({ status, especie, genero, origen, setHide }) {
+export default function Description({ status, especie, genero, origen, isFavorite, setHide }) {
 
     const ocultar = () => {
         setHide(true)
