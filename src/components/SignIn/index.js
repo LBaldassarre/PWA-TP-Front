@@ -21,8 +21,6 @@ export default function SignIn() {
     const content = await rawResponse.json();
     localStorage.setItem("characters_id",content.data.characters_id);
     localStorage.setItem("email",content.data.email);
-    console.log(content.mensaje);
-    console.log(localStorage.getItem("characters_id"))
     event.target.reset()
   }
 
