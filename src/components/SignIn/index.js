@@ -2,11 +2,27 @@ import './SignIn.css';
 
 export default function SignIn() {
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     for (let i = 0; i < event.target.length; i++) {
       console.log(event.target[i].type, event.target[i].value)
     }
+    const email = event.target[0].value;
+    const password = event.target[1].value;
+    const body = JSON.stringify({email: email, password: password});
+
+    console.log(body);
+
+    const rawResponse = await fetch('http://localhost:5000/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body
+    });
+    const content = await rawResponse.json();
+    console.log(content.mensaje);
+    console.log(content.data)
     event.target.reset()
   }
 
