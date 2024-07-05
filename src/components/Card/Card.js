@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Description from '../Description/Description';
 
 import "./Card.css"
+import Characters from '../../pages/Characters/Characters';
 
 export default function Card({ infoPersonaje, isFavorite }) {
 
@@ -15,6 +16,22 @@ export default function Card({ infoPersonaje, isFavorite }) {
 
     const handleFavorite = () => {
         setIsFav(!isFav);
+
+        if (!isFav) {
+            let characters_id = JSON.parse(localStorage.getItem("characters_id"));
+            characters_id.push(infoPersonaje.id);
+            console.log(characters_id);
+            localStorage.setItem("characters_id",JSON.stringify(characters_id));
+        } else {
+            let characters_id = JSON.parse(localStorage.getItem("characters_id"));
+            console.log(characters_id);
+            let index = characters_id.indexOf(infoPersonaje.id);
+            console.log(index);
+            characters_id.splice(index, 1);
+            console.log(characters_id);
+            localStorage.setItem("characters_id",JSON.stringify(characters_id));
+        }
+
     }
 
     return (

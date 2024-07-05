@@ -8,13 +8,31 @@ import Home from './pages/Home/Home';
 import Characters from './pages/Characters/Characters';
 import Contact from './pages/Contact/Contact';
 
+async function saveFavorites () {
+  console.log('doing things');
+  const characters_id = localStorage.getItem("characters_id");
+  const email = localStorage.getItem("email");
+  const body = JSON.stringify({email: email, characters_id: characters_id});
+
+  const rawResponse = await fetch('http://localhost:5000/users/characters', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body
+    });
+    const content = await rawResponse.json();
+    console.log(content.mensaje);
+    console.log('finish');
+  }
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/characters' element={<Characters />} />
+        <Route path='/characters' element={<Characters />} onLeave={saveFavorites()} />
         <Route path='/contact' element={<Contact />} />
       </Routes>
     </Router>

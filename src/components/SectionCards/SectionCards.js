@@ -13,7 +13,6 @@ export default function SectionCards() {
     let [listaPersonajes, setListaPersonajes] = useState([]);//genero un estado que como inicio es un array vacio que luego lo modifico con la info que traigo de la API;
     let [personajesCompleto, setPersonajesCompleto] = useState([])
     let [filtrosAplicados, setFiltrosAplicados] = useState([]);//lista que inicia vacia de todos los filtros que tenemos marcados para aplicar
-    let [user, setUsers] = useState({});
 
     const traerPersonajes = async () => {
 
@@ -28,19 +27,6 @@ export default function SectionCards() {
         setListaPersonajes(info)//cambio el estado de listaPersonajes de vacio a la lista con todos los personajes que traemos de la API y va a re-renderizar el componente - actualizarlo
 
         setPersonajesCompleto(info)
-    };
-
-    const traerUsuario = async () => {
-
-        let user = await fetch("http://localhost:5000/users")//ejecutar la peticion a esa direccion
-            .then((resp) => { return resp.json() })//accionar si logra obtener la info
-            .then((data) => { return data.users[0] })
-            //siguiente accion que hacemos si todo salio bien.En este caso aprovechamos que sabemos que esta API en particular devuelve la lista de personajes dentro de la propiedad "results" 
-            .catch((error) => { console.log(error) })//accionar si no logra obtenerla
-
-        //json() -> metodo que evalua lo que le pasemos como JSON y lo parsea , lo tranasforma a una array|objeto
-
-        setUsers(user)
     };
 
     //funcion que agrega o saca filtros de la lista de filtros a aplicar (actualizo la lista de los filtros a aplicar)
@@ -82,8 +68,6 @@ export default function SectionCards() {
 
     useEffect(() => {
         traerPersonajes();
-        traerUsuario();
-        console.log(user.characters_id)
     }, []);
     //a penas se cargue por primera vez el componente "SectionCards",ejecute la funcion traerPersonajes
     return (
@@ -96,7 +80,7 @@ export default function SectionCards() {
                 {
                     listaPersonajes.map((personaje) => {
                         // return  <Card key={personaje.id} infoPersonaje={personaje}/>
-                        const isFavorite = user.characters_id.includes(personaje.id) ? true : false;
+                        const isFavorite = localStorage.getItem("characters_id").includes(personaje.id) ? true : false;
                         return <Card key={personaje.id} infoPersonaje={personaje} isFavorite={isFavorite} />
                     })
                 }

@@ -11,8 +11,6 @@ export default function SignIn() {
     const password = event.target[1].value;
     const body = JSON.stringify({email: email, password: password});
 
-    console.log(body);
-
     const rawResponse = await fetch('http://localhost:5000/users/login', {
       method: 'POST',
       headers: {
@@ -21,8 +19,10 @@ export default function SignIn() {
       body: body
     });
     const content = await rawResponse.json();
+    localStorage.setItem("characters_id",content.data.characters_id);
+    localStorage.setItem("email",content.data.email);
     console.log(content.mensaje);
-    console.log(content.data)
+    console.log(localStorage.getItem("characters_id"))
     event.target.reset()
   }
 
