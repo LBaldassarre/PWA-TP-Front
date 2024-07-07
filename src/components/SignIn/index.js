@@ -1,6 +1,13 @@
+import { useState, useEffect } from 'react';
 import './SignIn.css';
 
 export default function SignIn() {
+
+  let [singInStatus, setSingInStatus] = useState('default');
+  // 'default' = user did not try to sign in
+  // 'wrong email' = user try to sign in with an email not found in the db
+  // 'wrong password' = user try to sign with a valid email but wrong password
+  // 'success' = email and password combination was found in the db
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -9,7 +16,7 @@ export default function SignIn() {
     }
     const email = event.target[0].value;
     const password = event.target[1].value;
-    const body = JSON.stringify({email: email, password: password});
+    const body = JSON.stringify({ email: email, password: password });
 
     const rawResponse = await fetch('http://localhost:5000/users/login', {
       method: 'POST',
@@ -19,10 +26,19 @@ export default function SignIn() {
       body: body
     });
     const content = await rawResponse.json();
-    localStorage.setItem("characters_id",content.data.characters_id);
-    localStorage.setItem("email",content.data.email);
+    const message = content.message;
+    setSingInStatus(message);
+
+    if (message == 'Log In Successful') {
+      localStorage.setItem("characters_id", content.data.characters_id);
+      localStorage.setItem("email", content.data.email);
+    }
+
     event.target.reset()
   }
+
+  useEffect(() => {
+  }, [singInStatus]);
 
   return (
     <form className='container-fluid mb-4' onSubmit={handleSubmit}>
@@ -46,6 +62,11 @@ export default function SignIn() {
           Submit
         </button>
       </div>
+      {singInStatus == "default" ? null :
+        <div>
+          <p className={singInStatus == "Log In Successful" ? 'sing-in-status success' : 'sing-in-status error'}>{singInStatus}</p>
+        </div>
+      }
     </form>
   )
 

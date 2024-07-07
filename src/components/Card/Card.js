@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Description from '../Description/Description';
 
 import "./Card.css"
-import Characters from '../../pages/Characters/Characters';
 
 export default function Card({ infoPersonaje, isFavorite }) {
 
