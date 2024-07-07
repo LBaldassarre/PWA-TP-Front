@@ -67,7 +67,27 @@ export default function SectionCards() {
     //este useEffect se ejecuta cada vez que ve que se modifica la lista de filtros a aplicar
 
     useEffect(() => {
+        const saveFavorites = async () => {
+            const characters_id = localStorage.getItem("characters_id");
+            const email = localStorage.getItem("email");
+            const body = JSON.stringify({email: email, characters_id: characters_id});
+          
+            const rawResponse = await fetch('http://localhost:5000/users/characters', {
+                method: 'PATCH',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: body
+              });
+              const content = await rawResponse.json();
+              console.log(content.mensaje);
+            }
+
         traerPersonajes();
+        window.addEventListener('beforeunload', saveFavorites);
+        return () => {
+            window.removeEventListener('beforeunload', saveFavorites);
+          };
     }, []);
     //a penas se cargue por primera vez el componente "SectionCards",ejecute la funcion traerPersonajes
     return (
@@ -80,7 +100,7 @@ export default function SectionCards() {
                 {
                     listaPersonajes.map((personaje) => {
                         // return  <Card key={personaje.id} infoPersonaje={personaje}/>
-                        const isFavorite = localStorage.getItem("characters_id").includes(personaje.id) ? true : false;
+                        const isFavorite = JSON.parse(localStorage.getItem("characters_id")).includes(personaje.id) ? true : false;
                         return <Card key={personaje.id} infoPersonaje={personaje} isFavorite={isFavorite} />
                     })
                 }

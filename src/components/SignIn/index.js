@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
 import './SignIn.css';
 
 export default function SignIn() {
+
+  const navigate = useNavigate();
 
   let [singInStatus, setSingInStatus] = useState('default');
   // 'default' = user did not try to sign in
@@ -32,6 +35,9 @@ export default function SignIn() {
     if (message == 'Log In Successful') {
       localStorage.setItem("characters_id", content.data.characters_id);
       localStorage.setItem("email", content.data.email);
+      setTimeout(() => {
+        navigate('/characters')
+      }, 2000)
     }
 
     event.target.reset()
@@ -41,8 +47,8 @@ export default function SignIn() {
   }, [singInStatus]);
 
   return (
-    <form className='container-fluid mb-4' onSubmit={handleSubmit}>
-      <h3>Sign In</h3>
+      <form className='container-fluid mb-4' onSubmit={handleSubmit}>
+        <h3>Sign In</h3>
       <div className="mb-3">
         <input
           type="email"
@@ -64,7 +70,11 @@ export default function SignIn() {
       </div>
       {singInStatus == "default" ? null :
         <div>
-          <p className={singInStatus == "Log In Successful" ? 'sing-in-status success' : 'sing-in-status error'}>{singInStatus}</p>
+          {
+          singInStatus == "Log In Successful" 
+            ? <p className='sing-in-status success'>{singInStatus + ' (Redirecting in 2s)'}</p> 
+            : <p className='sing-in-status error'>{singInStatus}</p> 
+          }
         </div>
       }
     </form>
