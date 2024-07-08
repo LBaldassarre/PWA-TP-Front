@@ -14,9 +14,6 @@ export default function SignIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    for (let i = 0; i < event.target.length; i++) {
-      console.log(event.target[i].type, event.target[i].value)
-    }
     const email = event.target[0].value;
     const password = event.target[1].value;
     const body = JSON.stringify({ email: email, password: password });
