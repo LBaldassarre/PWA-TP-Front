@@ -21,7 +21,6 @@ async function saveFavorites () {
       body: body
     });
     const content = await rawResponse.json();
-    console.log(content.message);
   }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

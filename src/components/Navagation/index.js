@@ -20,7 +20,6 @@ export default function Navegation({ page }) {
             body: body
         });
         const content = await rawResponse.json();
-        console.log(content.mensaje);
         localStorage.clear();
         navigate('/');
     };

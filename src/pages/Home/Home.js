@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import SignIn from "../../components/SignIn";
 import SignUp from "../../components/SignUp";
+import ChangePassword from '../../components/ChangePassword';
 
 import "./Home.css";
 
@@ -21,18 +22,22 @@ export default function Home() {
         ifSingInToCharacters();
     }, []);
 
-    let [signIn, setSingIn] = useState(true);
-    let [signUp, setSingUp] = useState(false);
+    let [formStatus, setFormStatus] = useState('SingIn');
 
     const handleSingIn = () => {
-        setSingIn(true);
-        setSingUp(false);
+        setFormStatus('SingIn');
     }
 
     const handleSingUp = () => {
-        setSingIn(false);
-        setSingUp(true);
+        setFormStatus('SingUp');
     }
+
+    const handleChangePassword = () => {
+        setFormStatus('ChangePassword');
+    }
+
+    useEffect(() => {;
+    }, [formStatus]);
 
     return (
         <div className="container-fluid d-grid vh-100 w-100">
@@ -42,17 +47,24 @@ export default function Home() {
                 <h2 className="text-center mt-2">Welcome to Rick & Morty Proyect!</h2>
                 <h2 className="text-center mt-2">Lets go!</h2>
                 <ul className="home-buttons align-self-center justify-self-center d-flex justify-content-center">
-                    <button className={signIn ? "btn btn-inicio-active" : "btn btn-inicio"} onClick={handleSingIn}>Sing In</button>
-                    <button className={signUp ? "btn btn-inicio-active" : "btn btn-inicio"} onClick={handleSingUp}>Sing Up</button>
+                    <button className={formStatus === 'SingIn' ? "btn btn-inicio-active" : "btn btn-inicio"} onClick={handleSingIn}>Sing In</button>
+                    <button className={formStatus === 'SingUp' ? "btn btn-inicio-active" : "btn btn-inicio"} onClick={handleSingUp}>Sing Up</button>
                 </ul>
-                {signIn ? <SignIn /> : <SignUp />}
+                {(() => {
+                    if (formStatus === 'SingUp') {
+                        return <SignUp />
+                    } else if (formStatus === 'ChangePassword') {
+                        return <ChangePassword />
+                    } else {
+                        return (<div> 
+                            <SignIn /> 
+                            <div className='container-fluid' onClick={handleChangePassword}><a href="#" className='pe-auto'>Change Password</a></div> 
+                            </div> )
+                    }
+                })()}
             </div>
 
         </div>
 
     )
 }
-
-//armando la primer hoja de nuestro proyecto
-
-//

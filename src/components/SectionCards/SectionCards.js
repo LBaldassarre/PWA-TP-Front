@@ -83,7 +83,6 @@ export default function SectionCards() {
                 body: body
               });
               const content = await rawResponse.json();
-              console.log(content.mensaje);
             }
 
         traerPersonajes();

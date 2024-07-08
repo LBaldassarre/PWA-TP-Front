@@ -47,7 +47,7 @@ export default function SignIn() {
   }, [singInStatus]);
 
   return (
-      <form className='container-fluid mb-4' onSubmit={handleSubmit}>
+      <form className='container-fluid mb-1' onSubmit={handleSubmit}>
         <h3>Sign In</h3>
       <div className="mb-3">
         <input
