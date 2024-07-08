@@ -34,6 +34,11 @@ h1:hover {
     width: fit-content;
 }
 
+.navbar-brand{
+    color: #6eccaf;
+    padding: 10px 80px;
+}
+
 .active {
     color: #344d67 !important;
     background-color: #6eccaf !important;

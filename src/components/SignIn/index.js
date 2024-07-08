@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import './SignIn.css';
 
 export default function SignIn() {
@@ -30,8 +30,11 @@ export default function SignIn() {
     setSingInStatus(message);
 
     if (message == 'Log In Successful') {
-      localStorage.setItem("characters_id", content.data.characters_id);
-      localStorage.setItem("email", content.data.email);
+      const userRaw = await fetch(`http://localhost:5000/users/${email}`)
+      const user = await userRaw.json();
+      localStorage.setItem("user", user.user.userName)
+      localStorage.setItem("characters_id", user.user.characters_id);
+      localStorage.setItem("email", user.user.email);
       setTimeout(() => {
         navigate('/characters')
       }, 2000)

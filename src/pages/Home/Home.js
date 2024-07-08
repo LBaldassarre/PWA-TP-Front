@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import SignIn from "../../components/SignIn";
 import SignUp from "../../components/SignUp";
@@ -6,6 +7,19 @@ import SignUp from "../../components/SignUp";
 import "./Home.css";
 
 export default function Home() {
+
+    const navigate = useNavigate();
+    const isLocalStorageEmpty = window.localStorage.length === 0;
+
+    const ifSingInToCharacters = () => {
+        if (!isLocalStorageEmpty) {
+            navigate('/characters');
+        }
+    }
+
+    useEffect(() => {
+        ifSingInToCharacters();
+    }, []);
 
     let [signIn, setSingIn] = useState(true);
     let [signUp, setSingUp] = useState(false);
