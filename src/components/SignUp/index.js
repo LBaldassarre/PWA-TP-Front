@@ -5,7 +5,7 @@ import PasswordRequirements from '../PasswordRequirements'
 export default function SignUp() {
 
     let [singUpStatus, setSingUpStatus] = useState('default');
-    let [isPasswordOnFocus, setIsPasswordOnFocus] = useState(true);
+    let [isPasswordOnFocus, setIsPasswordOnFocus] = useState(false);
 
     const showPasswordRequirements = () => {
         setIsPasswordOnFocus(!isPasswordOnFocus);
@@ -59,6 +59,7 @@ export default function SignUp() {
             <div className="mb-2">
                 <input
                     onClick={showPasswordRequirements}
+                    onFocus={showPasswordRequirements}
                     type="password"
                     className="form-control"
                     placeholder="Enter password"

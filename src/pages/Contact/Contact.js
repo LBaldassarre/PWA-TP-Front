@@ -4,7 +4,7 @@ import Navegation from "../../components/Navagation"
 export default function Contact() {
     return (
         <div>
-            <Navegation hoja="Contact" />
+            <Navegation page="Contact" />
             <main className="d-flex justify-content-center">
                 <div className="contact-container d-flex flex-column justify-content-center aling-items-center mt-5">
                     <h2 className="text-center text">Contact</h2>

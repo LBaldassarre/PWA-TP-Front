@@ -6,7 +6,7 @@ export default function Characters() {
 
     return (
         <div>
-            <Navegation hoja="Characters" />
+            <Navegation page="Characters" />
             <SectionCards />
         </div>
 

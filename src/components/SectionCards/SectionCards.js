@@ -60,6 +60,9 @@ export default function SectionCards() {
             } else if (data === "Unknown") {
                 let dataFiltrada = listaPersonajes.filter((personaje) => personaje.origin.name === "unknown");
                 setListaPersonajes(dataFiltrada)
+            } else if (data === "Favorite") {
+                let dataFiltrada = listaPersonajes.filter((personaje) => JSON.parse(localStorage.getItem("characters_id")).includes(personaje.id));
+                setListaPersonajes(dataFiltrada)
             }
         })
 

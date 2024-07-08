@@ -32,6 +32,7 @@ export default function Filters({ filterCharacter }) {
                             <Filter className="nav-item" filterName="Female" title="Female" filterCharacter={filterCharacter} />
                             <Filter className="nav-item" filterName="Male" title="Male" filterCharacter={filterCharacter} />
                             <Filter className="nav-item" filterName="Unknown" title="Origin Unknown" filterCharacter={filterCharacter} />
+                            <Filter className="nav-item" filterName="Favorite" title="Favorite" filterCharacter={filterCharacter} />
                         </form>
                     </div>
                 </div>
