@@ -47,7 +47,7 @@ p {
 @media (min-width: 768px) {
     .container-home {
         width: 600px;
-        height: 600px;
+        min-height: 600px;
     }
 
     .h-1 {
