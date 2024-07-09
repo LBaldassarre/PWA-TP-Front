@@ -18,7 +18,7 @@ export default function SignIn() {
     const password = event.target[1].value;
     const body = JSON.stringify({ email: email, password: password });
 
-    const rawResponse = await fetch('http://localhost:5000/users/login', {
+    const rawResponse = await fetch('https://pwa-tp-api.onrender.com/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
