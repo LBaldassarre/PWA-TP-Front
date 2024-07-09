@@ -12,7 +12,7 @@ export default function Navegation({ page }) {
         const email = localStorage.getItem("email");
         const body = JSON.stringify({email: email, characters_id: characters_id});
 
-        const rawResponse = await fetch('http://localhost:5000/users/characters', {
+        const rawResponse = await fetch('https://pwa-tp-api.onrender.com/users/characters', {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

@@ -30,7 +30,7 @@ export default function SignIn() {
     setSingInStatus(message);
 
     if (message == 'Log In Successful') {
-      const userRaw = await fetch(`http://localhost:5000/users/${email}`)
+      const userRaw = await fetch(`https://pwa-tp-api.onrender.com/users/${email}`)
       const user = await userRaw.json();
       localStorage.setItem("user", user.user.userName)
       localStorage.setItem("characters_id", user.user.characters_id);

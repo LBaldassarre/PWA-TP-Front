@@ -22,7 +22,7 @@ export default function SignUp() {
         const password = event.target[2].value;
         const body = JSON.stringify({ userName: userName, email: email, password: password });
 
-        const rawResponse = await fetch('http://localhost:5000/users/', {
+        const rawResponse = await fetch('https://pwa-tp-api.onrender.com/users/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

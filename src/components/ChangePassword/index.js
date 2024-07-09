@@ -21,7 +21,7 @@ export default function ChangePassword() {
         const newPassword = event.target[1].value;
         const body = JSON.stringify({ email: email, newPassword: newPassword });
 
-        const rawResponse = await fetch('http://localhost:5000/users/changePassword', {
+        const rawResponse = await fetch('https://pwa-tp-api.onrender.com/users/changePassword', {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
