@@ -9,6 +9,22 @@ import "./Home.css";
 
 export default function Home() {
 
+    let [serverStatus, setServerStatus] = useState(false);
+
+    const serverResponse = async () => {
+        const resp = await fetch('https://pwa-tp-api.onrender.com/users/serverStatus');
+        const content = await resp.json();
+        const serverMessage = content.message
+
+        if (serverMessage == 'server running') {
+            setServerStatus(true);
+        }
+
+        return serverMessage;
+    }
+
+    const check = serverResponse();
+
     const navigate = useNavigate();
     const isLocalStorageEmpty = window.localStorage.length === 0;
 
@@ -36,12 +52,19 @@ export default function Home() {
         setFormStatus('ChangePassword');
     }
 
-    useEffect(() => {;
-    }, [formStatus]);
+    useEffect(() => {
+        ;
+    }, [formStatus, serverStatus]);
 
     return (
         <div className="container-fluid d-grid vh-100 w-100">
-
+            <div>
+                {
+                    serverStatus
+                        ? <p className='sing-in-status success'>Server Running</p>
+                        : <p className='sing-in-status error'>Server starting, please wait</p>
+                }
+            </div>
             <div className="container-home align-self-center">
                 <h1 className="h-1 text text-center">Proyect Rick & Morty</h1>
                 <h2 className="text-center mt-2">Welcome to Rick & Morty Proyect!</h2>
@@ -56,10 +79,10 @@ export default function Home() {
                     } else if (formStatus === 'ChangePassword') {
                         return <ChangePassword />
                     } else {
-                        return (<div> 
-                            <SignIn /> 
-                            <div className='container-fluid' onClick={handleChangePassword}><a href="#" className='pe-auto'>Change Password</a></div> 
-                            </div> )
+                        return (<div>
+                            <SignIn />
+                            <div className='container-fluid' onClick={handleChangePassword}><a href="#" className='pe-auto'>Change Password</a></div>
+                        </div>)
                     }
                 })()}
             </div>
