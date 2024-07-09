@@ -1,25 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './index.css';
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 import Home from './pages/Home/Home';
 import Characters from './pages/Characters/Characters';
 import Contact from './pages/Contact/Contact';
+
+async function saveFavorites () {
+  const characters_id = localStorage.getItem("characters_id");
+  const email = localStorage.getItem("email");
+  const body = JSON.stringify({email: email, characters_id: characters_id});
+
+  const rawResponse = await fetch('http://localhost:5000/users/characters', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body
+    });
+    const content = await rawResponse.json();
+  }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/characters' element={<Characters/>}/>
-        <Route path='/contact' element={<Contact/>}/>
+        <Route path='/' element={<Home />} />
+        <Route path='/characters' element={<Characters />} onLeave={saveFavorites} />
+        <Route path='/contact' element={<Contact />} />
       </Routes>
     </Router>
   </React.StrictMode>
 );
-//por el momento como no sabemos todavia como navegar entre paginas, las cargamos a las 3 y vamos comentando cual estamos queriendo reproducir 
+//por el momento como no sabemos todavia como navegar entre paginas, las cargamos a las 3 y vamos comentando cual estamos queriendo reproducir
 
 //para los estilos, podemos o hacer todo en CSS "puro" , o podemos utilizar las clases de Bootstrap.
 //IMPORTANTE, el atributo "class" en React lo reemplazamos por "className"

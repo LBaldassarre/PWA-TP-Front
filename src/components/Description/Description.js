@@ -1,9 +1,9 @@
-export default function Description({status,especie,genero,origen,setHide}) {
+export default function Description({ status, especie, genero, origen, isFavorite, setHide }) {
 
-    const ocultar=()=>{
+    const ocultar = () => {
         setHide(true)
     }
-    return(
+    return (
         <div className="d-flex flex-column align-items-center w-100">
             <div className="d-flex flex-column align-items-end w-100">
                 <button className="btn btn-active btn-card" onClick={ocultar}>X</button>
@@ -11,19 +11,19 @@ export default function Description({status,especie,genero,origen,setHide}) {
             <div className="d-flex flex-column align-items-start w-100">
                 <ul className="list-group">
                     <li className="list-group-item fw-bold">
-                        Character Status {status} 
+                        Character Status {status}
                     </li>
                     <li className="list-group-item fw-bold">
-                        <span className="fw-normal">Species</span> <br/>{especie}
+                        <span className="fw-normal">Species</span> <br />{especie}
                     </li>
                     <li className="list-group-item fw-bold">
-                        <span className="fw-normal">Origin</span> <br/>{origen}
+                        <span className="fw-normal">Origin</span> <br />{origen}
                     </li>
                     <li className="list-group-item fw-bold ">
-                        <span className="fw-normal">Gender</span> <br/> {genero}
+                        <span className="fw-normal">Gender</span> <br /> {genero}
                     </li>
                 </ul>
-            </div>        
+            </div>
         </div>
 
     )

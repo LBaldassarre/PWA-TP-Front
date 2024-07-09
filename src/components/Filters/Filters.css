@@ -28,7 +28,7 @@
     width: 100vw;
 }
 
-h1:hover{
+h1:hover {
     color: #6eccaf !important;
 }
 
@@ -43,14 +43,14 @@ h1:hover{
     flex-direction: column;
 }
 
-.active{
+.active {
     color: #344d67 !important;
     background-color: #6eccaf !important;
 }
 
 @media (min-width: 992px) {
 
-    .aligner{
+    .aligner {
         display: none !important;
     }
 
